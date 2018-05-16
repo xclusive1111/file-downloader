@@ -1,0 +1,27 @@
+@()(implicit assetsFinder: AssetsFinder)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Downloader</title>
+        <link rel="stylesheet" media="screen" href="@assetsFinder.path("main.css")">
+        <link rel="stylesheet" media="screen" href="@assetsFinder.path("semantic.min.css")">
+        <link rel="shortcut icon" type="image/png" href="@assetsFinder.path("images/favicon.png")">
+        <script src="@assetsFinder.path("semantic.min.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="ui container">
+            <div class="ui segment">
+                <h1 class="ui header">File Downloader</h1>
+
+                <form action="/download" class="ui form">
+                    <div class="ui fluid action input">
+                        <input type="text" name="link" placeholder="Enter your download link...">
+                        <input type="hidden" value="120000" name="timeout">
+                        <button type="submit" class="ui positive button">Download</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

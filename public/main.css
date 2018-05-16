@@ -1,0 +1,4 @@
+.ui.container > .ui.segment {
+    position: relative;
+    top: 20vh;
+}
