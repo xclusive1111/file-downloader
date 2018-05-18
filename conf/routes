@@ -4,8 +4,9 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
-# An example controller showing how to write asynchronous code
-GET     /download                   controllers.AsyncController.download(link: String, timeout: Int ?= 120000)
+POST    /                           controllers.HomeController.download
+GET     /ws                         controllers.DownloadController.ws
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(file)

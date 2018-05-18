@@ -1,4 +1,17 @@
 .ui.container > .ui.segment {
     position: relative;
-    top: 20vh;
+    top: 15vh;
+}
+
+#logs {
+    height: 60vh;
+    font-family: monospace;
+}
+
+#logs p {
+    margin-bottom: 1px;
+}
+
+.hidden {
+    display: none;
 }

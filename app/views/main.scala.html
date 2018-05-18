@@ -1,4 +1,4 @@
-@()(implicit assetsFinder: AssetsFinder)
+@(host: String, form: Form[DownloadForm])(implicit assetsFinder: AssetsFinder, request: MessagesRequestHeader)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,21 +7,36 @@
         <link rel="stylesheet" media="screen" href="@assetsFinder.path("main.css")">
         <link rel="stylesheet" media="screen" href="@assetsFinder.path("semantic.min.css")">
         <link rel="shortcut icon" type="image/png" href="@assetsFinder.path("images/favicon.png")">
+        <script src="@assetsFinder.path("jquery-3.1.1.min.js")" type="text/javascript"></script>
         <script src="@assetsFinder.path("semantic.min.js")" type="text/javascript"></script>
     </head>
-    <body>
+    <body url="@host">
         <div class="ui container">
             <div class="ui segment">
                 <h1 class="ui header">File Downloader</h1>
-
-                <form action="/download" class="ui form">
-                    <div class="ui fluid action input">
-                        <input type="text" name="link" placeholder="Enter your download link...">
-                        <input type="hidden" value="120000" name="timeout">
-                        <button type="submit" class="ui positive button">Download</button>
-                    </div>
-                </form>
+                <div class="ui fluid action input">
+                    <input type="text" name="link" placeholder="Enter your download link..." autofocus>
+                    <button id="download" type="button" class="ui positive button">Download</button>
+                </div>
+                <div id="logs" class="ui segment" style="display: none"></div>
+                <div class="hidden">
+                    @helper.form(action = routes.HomeController.download()) {
+                        @helper.CSRF.formField
+                        @helper.inputText(form("file"))
+                        <button class="ui button" type="submit">Download</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="ui basic modal">
+            <div class="header">Opps! Session closed</div>
+            <div class="content">
+                <p>Please refresh your browser to create another session</p>
+            </div>
+            <div class="actions">
+                <div class="ui approve button" onclick="window.location.reload()">Refresh</div>
             </div>
         </div>
     </body>
+    <script src="@assetsFinder.path("main.js")" type="text/javascript"></script>
 </html>
