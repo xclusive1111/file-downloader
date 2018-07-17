@@ -27,7 +27,7 @@ class DownloadingActor(out: ActorRef) extends Actor {
           .map(_.replaceAll("\\s+", ""))
           .foreach { filename =>
             println(s"Saving to ${Conf.tmpDir}/$filename")
-            val command = s"$cmd -t 3 -c -O ${Conf.tmpDir}${File.separator}$filename $link"
+            val command = s"$cmd --no-check-certificate -t 3 -c -O ${Conf.tmpDir}${File.separator}$filename $link"
             println("Executing: " + command)
             val exitCode = command ! ProcessLogger(captureLog, captureLog)
 
